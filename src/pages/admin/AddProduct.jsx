@@ -1,0 +1,2 @@
+import ProductForm from "./ProductForm"; import { useNavigate } from "react-router-dom"; import { useAdminProducts } from "./AdminProducts";
+export default function AddProduct(){const [products,setProducts]=useAdminProducts();const nav=useNavigate();return <><span className="eyebrow">CREATE</span><h1>Add product</h1><ProductForm onSubmit={p=>{setProducts([...products,{...p,id:"A"+Date.now()}]);nav("/admin/products")}}/></>}

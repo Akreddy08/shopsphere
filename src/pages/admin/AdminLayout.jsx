@@ -1,0 +1,2 @@
+import { NavLink,Outlet } from "react-router-dom";
+export default function AdminLayout(){return <section className="admin-layout"><aside className="admin-side"><span className="eyebrow">CONTROL CENTER</span><h2>Admin</h2><NavLink to="/admin">Overview</NavLink><NavLink to="/admin/products">Products</NavLink><NavLink to="/admin/products/add">Add product</NavLink></aside><div className="admin-main"><Outlet/></div></section>}

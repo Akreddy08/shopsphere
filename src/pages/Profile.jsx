@@ -1,0 +1,2 @@
+import { useAuth } from "../context/AuthContext"; import { Link } from "react-router-dom";
+export default function Profile(){const {user}=useAuth();return <section className="section profile"><span className="eyebrow">MY ACCOUNT</span><h1>Welcome, {user.name}</h1><div className="profile-card"><div className="avatar">{user.name[0].toUpperCase()}</div><div><h2>{user.name}</h2><p>{user.email}</p><span>Customer account</span></div></div><div className="account-links"><Link to="/orders">📦 View orders →</Link><Link to="/wishlist">♡ Saved items →</Link></div></section>}

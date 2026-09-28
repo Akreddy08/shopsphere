@@ -1,0 +1,8 @@
+import { useDispatch, useSelector } from "react-redux";
+import { increase,decrease,removeFromCart,clearCart } from "../redux/slices/cartSlice";
+import { Link } from "react-router-dom";
+export default function Cart(){
+ const cart=useSelector(s=>s.cart); const dispatch=useDispatch(); const total=cart.reduce((n,p)=>n+p.price*p.quantity,0);
+ if(!cart.length)return <div className="empty-state page-empty"><div className="empty-icon">🛒</div><h1>Your cart is empty</h1><p>Looks like you haven't added anything yet.</p><Link className="primary-btn" to="/products">Start shopping</Link></div>;
+ return <section className="section"><div className="section-heading"><div><span className="eyebrow">YOUR BAG</span><h1>Shopping cart</h1></div><button className="text-btn" onClick={()=>dispatch(clearCart())}>Clear cart</button></div><div className="cart-layout"><div className="cart-list">{cart.map(p=><div className="cart-item" key={p.id}><img src={p.image}/><div className="cart-item-copy"><h3>{p.title}</h3><span>{p.category}</span><strong>${p.price.toFixed(2)}</strong></div><div className="qty"><button onClick={()=>dispatch(decrease(p.id))}>−</button><b>{p.quantity}</b><button onClick={()=>dispatch(increase(p.id))}>+</button></div><button className="remove" onClick={()=>dispatch(removeFromCart(p.id))}>Remove</button></div>)}</div><aside className="summary"><h2>Order summary</h2><div><span>Subtotal</span><b>${total.toFixed(2)}</b></div><div><span>Shipping</span><b>{total>=50?"Free":"$5.00"}</b></div><hr/><div className="summary-total"><span>Total</span><b>${(total+(total>=50?0:5)).toFixed(2)}</b></div><button className="primary-btn full" onClick={()=>alert("Demo checkout successful!")}>Checkout</button></aside></div></section>
+}

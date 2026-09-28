@@ -1,0 +1,2 @@
+import ProductForm from "./ProductForm"; import { useAdminProducts } from "./AdminProducts"; import { useParams,useNavigate } from "react-router-dom";
+export default function EditProduct(){const {id}=useParams();const [products,setProducts]=useAdminProducts();const product=products.find(p=>p.id===id);const nav=useNavigate();if(!product)return <h2>Product not found</h2>;return <><span className="eyebrow">UPDATE</span><h1>Edit product</h1><ProductForm initial={product} onSubmit={p=>{setProducts(products.map(x=>x.id===id?{...p,id}:x));nav("/admin/products")}}/></>}
